@@ -1,84 +1,62 @@
-const buyButtons = document.querySelectorAll(".buy-btn");
+// Ambil elemen
 const modal = document.getElementById("paymentModal");
 const closeModal = document.getElementById("closeModal");
-const modalTitle = document.getElementById("modalTitle");
+const buyBtns = document.querySelectorAll(".buy-btn");
 const purchaseForm = document.getElementById("purchaseForm");
 const paymentInfo = document.getElementById("paymentInfo");
+const notif = document.getElementById("notif");
+
+// Data produk
 const selectedProduct = document.getElementById("selectedProduct");
 const selectedPrice = document.getElementById("selectedPrice");
-const copyButtons = document.querySelectorAll(".copy-btn");
-const notif = document.getElementById("notif");
-const sendOrder = document.getElementById("sendOrder");
-const apkCards = document.querySelectorAll(".apk-card");
 
-let currentProduct = "";
-let currentPrice = "";
+// Buka modal
+buyBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    modal.style.display = "flex";
+    document.getElementById("modalTitle").innerText = 
+      "Formulir Pembelian - " + btn.dataset.apk;
 
-// Scroll animation kartu
-const showCards = () => {
-    const triggerBottom = window.innerHeight / 1.1;
-    apkCards.forEach(card => {
-        const cardTop = card.getBoundingClientRect().top;
-        if (cardTop < triggerBottom) card.classList.add("show");
-    });
-};
-window.addEventListener("scroll", showCards);
-window.addEventListener("load", showCards);
+    selectedProduct.innerText = btn.dataset.apk;
+    selectedPrice.innerText = "Rp " + btn.dataset.price;
 
-// Modal
-const modalAnimation = () => modal.classList.add("show");
-buyButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-        currentProduct = btn.dataset.apk;
-        currentPrice = btn.dataset.price;
-        modal.style.display = "flex";
-        modal.classList.remove("show");
-        setTimeout(modalAnimation, 50);
-        modalTitle.textContent = `Formulir Pembelian - ${currentProduct}`;
-        purchaseForm.style.display = "flex";
-        paymentInfo.style.display = "none";
-    });
+    purchaseForm.style.display = "block";
+    paymentInfo.style.display = "none";
+  });
 });
 
+// Tutup modal
 closeModal.addEventListener("click", () => {
-    modal.style.display = "none";
-    modal.classList.remove("show");
-});
-window.addEventListener("click", e => {
-    if (e.target === modal) {
-        modal.style.display = "none";
-        modal.classList.remove("show");
-    }
+  modal.style.display = "none";
 });
 
-purchaseForm.addEventListener("submit", e => {
-    e.preventDefault();
-    selectedProduct.textContent = currentProduct;
-    selectedPrice.textContent = currentPrice + " IDR";
-    purchaseForm.style.display = "none";
-    paymentInfo.style.display = "block";
+// Submit form
+purchaseForm.addEventListener("submit", (e) => {
+  e.preventDefault();
+  purchaseForm.style.display = "none";
+  paymentInfo.style.display = "block";
 });
 
-// Copy nomor
-copyButtons.forEach(btn => {
-    btn.addEventListener("click", () => {
-        navigator.clipboard.writeText(btn.dataset.num).then(() => {
-            notif.textContent = "✅ Nomor disalin!";
-            notif.style.display = "block";
-            setTimeout(() => {
-                notif.style.display = "none";
-            }, 1500);
-        });
-    });
+// Salin nomor
+const copyBtns = document.querySelectorAll(".copy-btn");
+copyBtns.forEach(btn => {
+  btn.addEventListener("click", () => {
+    navigator.clipboard.writeText(btn.dataset.num);
+    showNotif("✅ Nomor berhasil disalin: " + btn.dataset.num);
+  });
 });
 
-// Kirim pesanan
-sendOrder.addEventListener("click", () => {
-    notif.textContent = "✅ Pesanan berhasil dikirim ke seller!";
-    notif.style.display = "block";
-    setTimeout(() => {
-        notif.style.display = "none";
-    }, 1500);
-    modal.style.display = "none";
-    modal.classList.remove("show");
+// Tombol kirim order
+document.getElementById("sendOrder").addEventListener("click", () => {
+  modal.style.display = "none";
+  showNotif("✅ Pesanan berhasil dikirim!");
 });
+
+// Notifikasi
+function showNotif(msg) {
+  notif.innerText = msg;
+  notif.style.display = "block";
+  setTimeout(() => {
+    notif.style.display = "none";
+  }, 3000);
+}
