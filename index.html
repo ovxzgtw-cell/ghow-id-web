@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GHOW ID – Unlock Premium Apps</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header class="parallax">
+  <h1>GHOW ID</h1>
+  <p>Unlock Premium Apps, Sewa Bot Canggih & Panel Terbaik</p>
+</header>
+
+<main>
+
+  <section class="ghow-section">
+    <div class="ghow-card">
+      <h3>GHOW - ID</h3>
+      <p><strong>MENYEDIAKAN:</strong> App Premium | Sewa Bot | Script Bot Store WhatsApp | Panel Terbaik Anti Delay | Dan Lainnya</p>
+    </div>
+  </section>
+
+  <section class="apk-list">
+    <div class="apk-card">
+      <h3>APK Premium 1</h3>
+      <p>Fitur lengkap tanpa batasan, update rutin.</p>
+      <p>Harga: <span class="apk-price">50.000</span></p>
+      <button class="buy-btn" data-apk="APK Premium 1" data-price="50000">Beli Sekarang</button>
+    </div>
+    <div class="apk-card">
+      <h3>APK Premium 2</h3>
+      <p>Akses semua konten eksklusif dan bebas iklan.</p>
+      <p>Harga: <span class="apk-price">75.000</span></p>
+      <button class="buy-btn" data-apk="APK Premium 2" data-price="75000">Beli Sekarang</button>
+    </div>
+  </section>
+</main>
+
+<!-- Modal -->
+<div class="modal" id="paymentModal">
+  <div class="modal-content">
+    <span class="close-btn" id="closeModal">&times;</span>
+    <h3 id="modalTitle">Formulir Pembelian</h3>
+    <form id="purchaseForm">
+      <label>NAMA ANDA :</label>
+      <input type="text" id="name" required placeholder="Nama anda">
+      <label>WHATSAPP :</label>
+      <input type="tel" id="whatsapp" required placeholder="08xxxxxxxxxx">
+      <label>EMAIL (opsional) :</label>
+      <input type="email" id="email" placeholder="contoh@email.com">
+      <label>FITUR :</label>
+      <textarea id="features" placeholder="Misal: unlock semua level"></textarea>
+      <button type="submit" class="submit-btn">Lanjut ke Pembayaran</button>
+    </form>
+
+    <div class="payment-info" id="paymentInfo">
+      <h4>METODE PEMBAYARAN</h4>
+      <p>DANA : <span id="danaNum">081234567890</span> <button class="copy-btn" data-num="081234567890">Salin</button></p>
+      <p>OVO : <span id="ovoNum">081234567891</span> <button class="copy-btn" data-num="081234567891">Salin</button></p>
+      <p>GOPAY : <span id="gopayNum">081234567892</span> <button class="copy-btn" data-num="081234567892">Salin</button></p>
+
+      <div class="qris-container">
+        <h5>Scan QRIS:</h5>
+        <img src="qris.png" alt="QRIS Pembayaran">
+      </div>
+
+      <p>PRODUK : <span id="selectedProduct"></span></p>
+      <p>NOMINAL : <span id="selectedPrice"></span></p>
+      <button type="button" class="submit-btn" id="sendOrder">Kirim</button>
+    </div>
+  </div>
+</div>
+
+<div id="notif">✅ Pesanan berhasil dikirim!</div>
+
+<footer>
+  &copy; 2025 GHOW ID. All rights reserved.
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
